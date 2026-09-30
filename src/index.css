@@ -1,0 +1,521 @@
+:root {
+  --bg: #0f1117;
+  --card: #1a1d27;
+  --card-hover: #20232f;
+  --text: #e8e8ec;
+  --muted: #9a9ba8;
+  --accent: #e0a52c;
+  --accent-2: #4f7cff;
+  --danger: #ff6b6b;
+  --radius: 12px;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top left, #161923, var(--bg) 60%);
+  color: var(--text);
+}
+
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+  animation: fadeIn 0.4s ease both;
+}
+
+/* ---------- Animaciones base ---------- */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: 200px 0;
+  }
+}
+
+/* ---------- Header ---------- */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+header h1 {
+  cursor: pointer;
+  margin: 0;
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
+}
+header h1:hover {
+  transform: translateY(-2px);
+  color: var(--accent);
+}
+
+/* ---------- Botones ---------- */
+
+button {
+  background: var(--accent-2);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.15s ease;
+}
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(79, 124, 255, 0.35);
+}
+button:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+button.secundario {
+  background: transparent;
+  border: 1px solid var(--muted);
+  color: var(--muted);
+  box-shadow: none;
+}
+button.secundario:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+}
+
+/* ---------- Filtros ---------- */
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+  animation: fadeInUp 0.35s ease both;
+}
+.filtros input,
+.filtros select {
+  flex: 1 1 140px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: var(--card);
+  color: var(--text);
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.filtros input:focus,
+.filtros select:focus {
+  outline: none;
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.2);
+}
+
+/* ---------- Grid y tarjetas ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--card);
+  padding: 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  border: 1px solid #262a38;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+  animation: fadeInUp 0.4s ease both;
+  animation-delay: var(--delay, 0s);
+}
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-2);
+  background: var(--card-hover);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+.anio {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.director,
+.saga {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 4px 0;
+}
+.duracion {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.tipo-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin: 2px 0 6px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0;
+}
+.chip {
+  background: #262a38;
+  color: var(--accent);
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+.chip:hover {
+  background: #313649;
+  transform: translateY(-1px);
+}
+
+.card-footer {
+  margin-top: 10px;
+  font-weight: 600;
+}
+.calificacion {
+  color: var(--accent);
+}
+.calificacion-grande {
+  font-size: 1.3rem;
+  color: var(--accent);
+  font-weight: 700;
+  animation: popIn 0.3s ease both;
+}
+
+/* ---------- Detalle ---------- */
+
+.detalle {
+  background: var(--card);
+  padding: 24px;
+  border-radius: var(--radius);
+  animation: slideIn 0.3s ease both;
+}
+.volver {
+  margin-bottom: 16px;
+  background: transparent;
+  color: var(--muted);
+}
+.volver:hover {
+  color: var(--accent);
+  box-shadow: none;
+}
+.meta {
+  color: var(--muted);
+}
+.descripcion {
+  line-height: 1.5;
+}
+
+/* ---------- Temporadas y capítulos ---------- */
+
+.temporadas-lista {
+  margin-top: 24px;
+}
+
+.temporada-detalle {
+  background: #12141c;
+  border: 1px solid #262a38;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s ease;
+}
+.temporada-detalle:hover {
+  border-color: #3a3f52;
+}
+.temporada-detalle summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent);
+  transition: color 0.15s ease;
+}
+.temporada-detalle summary:hover {
+  color: #f0c563;
+}
+
+.capitulo-detalle {
+  border-top: 1px solid #262a38;
+  padding: 12px 0;
+  animation: fadeIn 0.25s ease both;
+}
+.capitulo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+.capitulo-descripcion {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 4px 0 8px;
+}
+
+.comentarios-compacto .form-comentario {
+  padding: 10px;
+  gap: 6px;
+}
+.comentarios-compacto textarea {
+  min-height: 50px;
+}
+
+/* ---------- Comentarios ---------- */
+
+.comentarios {
+  list-style: none;
+  padding: 0;
+}
+.comentarios li {
+  border-bottom: 1px solid #262a38;
+  padding: 8px 0;
+  font-size: 0.9rem;
+  animation: fadeInUp 0.25s ease both;
+}
+.comentarios-bloque {
+  margin-top: 16px;
+}
+
+/* ---------- Formularios ---------- */
+
+.form-titulo,
+.form-comentario {
+  background: var(--card);
+  padding: 20px;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 560px;
+  animation: fadeInUp 0.35s ease both;
+}
+.form-titulo label,
+.form-comentario label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.form-titulo input,
+.form-titulo textarea,
+.form-titulo select,
+.form-comentario input,
+.form-comentario textarea {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #333;
+  background: #12141c;
+  color: var(--text);
+  font-family: inherit;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.form-titulo input:focus,
+.form-titulo textarea:focus,
+.form-titulo select:focus,
+.form-comentario input:focus,
+.form-comentario textarea:focus {
+  outline: none;
+  border-color: var(--accent-2);
+  box-shadow: 0 0 0 3px rgba(79, 124, 255, 0.2);
+}
+.form-titulo textarea,
+.form-comentario textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.tipo-selector {
+  display: flex;
+  gap: 16px;
+  background: #12141c;
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+.tipo-selector label {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 6px !important;
+  color: var(--text) !important;
+  cursor: pointer;
+}
+
+/* ---------- Editor de temporadas/capítulos ---------- */
+
+.temporadas-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.temporada-bloque {
+  background: #12141c;
+  border: 1px solid #262a38;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: fadeInUp 0.3s ease both;
+}
+.temporada-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.capitulos-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 6px;
+  padding-left: 12px;
+  border-left: 2px solid #262a38;
+}
+.capitulo-bloque {
+  display: grid;
+  grid-template-columns: 50px 1.5fr 90px 1.5fr 30px;
+  gap: 6px;
+  align-items: center;
+  animation: fadeInUp 0.25s ease both;
+}
+.capitulo-bloque input {
+  padding: 6px 8px;
+  font-size: 0.85rem;
+}
+.capitulo-bloque span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.error {
+  color: var(--danger);
+  animation: fadeIn 0.2s ease both;
+}
+
+/* ---------- Spinner de carga ---------- */
+
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 0;
+  gap: 10px;
+  color: var(--muted);
+}
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #333;
+  border-top-color: var(--accent-2);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ---------- Toast (notificación) ---------- */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--card);
+  border: 1px solid var(--accent-2);
+  color: var(--text);
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  animation: fadeInUp 0.3s ease both;
+  z-index: 100;
+}
+.toast-exito {
+  border-color: #3ecf8e;
+}
+.toast-error {
+  border-color: var(--danger);
+}
